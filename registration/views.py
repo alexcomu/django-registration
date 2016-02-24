@@ -51,6 +51,20 @@ def index(request):
 def post(request, *args, **kw):
 
     if kw.get('errors'):
-        return render(request, 'registration/index.html', {'errors': kw.get("errors_message"), "values":request.POST})
+        return render(request, 'registration/index.html',
+                      {'errors': kw.get("errors_message"), "values": request.POST})
+
+    # check email gia usata
+    # check username gia usato
+    # registrazione utente con aggiunta informazioni di registrazione
+    # invio mail / validazione immediata
+    # Validazione utente via mail
 
     return render(request, 'registration/index.html')
+
+
+
+
+
+
+
