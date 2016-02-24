@@ -5,18 +5,18 @@
 <div class="row">
     <h2>Registration Page</h2>
     <div class="col-md-12">
-        <form class="form-horizontal col-md-offset-2" method="post" action="{% url 'registration:post' %}">
+        <form class="form-horizontal col-md-offset-2" method="post" action="{% url 'registration:index' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-6">
-                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+                    <input type="email" value="{{ values.email }}" class="form-control" id="inputEmail" name="email" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputUsername" class="col-sm-2 control-label">Username</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Username">
+                    <input type="text" value="{{ values.username }}" class="form-control" id="inputUsername" name="username" placeholder="Username">
                 </div>
             </div>
             <div class="form-group">
@@ -39,5 +39,10 @@
         </form>
     </div>
 </div>
+{% if errors %}
+<div class="row">
+    {{ errors }}
+</div>
+{% endif %}
 
 {% endblock %}
