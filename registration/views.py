@@ -1,9 +1,6 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.core.urlresolvers import reverse
+from django.shortcuts import render
 from django.core.validators import validate_email
 from django import forms
-from django.shortcuts import get_object_or_404
 from .models import User
 
 ### TODO: API application/json used for register a user
@@ -52,8 +49,6 @@ def index(request):
     else:
         return render(request, 'registration/index.html')
 
-# def pippo(request):
-#     return JsonResponse({'foo':'bar'})
 
 @post_validator
 def post(request, *args, **kw):
@@ -61,16 +56,20 @@ def post(request, *args, **kw):
     if kw.get('errors'):
         return render(request, 'registration/index.html',
                       {'errors': kw.get("errors_message"), "values": request.POST})
-
     try:
         user = User.objects.get(email=request.POST['email'])
         return render(request, 'registration/index.html',
                       {'errors': ["Email already exists"], "values": request.POST})
     except:
         pass
+    try:
+        user = User.objects.get(username=request.POST['username'])
+        return render(request, 'registration/index.html',
+                      {'errors': ["Username already exists"], "values": request.POST})
+    except:
+        pass
 
-    # check email gia usata
-    # check username gia usato
+
     # registrazione utente con aggiunta informazioni di registrazione
     # invio mail / validazione immediata
     # Validazione utente via mail
